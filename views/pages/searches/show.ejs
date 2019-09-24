@@ -1,0 +1,27 @@
+<%- include('../layout/head')  %>
+
+<body class="searches">
+
+    <%- include('../layout/header.ejs') %>
+
+    <main>
+        <ul id="book-results-list">
+
+            <% 
+            console.log(data); 
+            data.forEach(book => { %>
+            <li>
+            <img class="cover-image" src="<%= book.imageUrl %>" />
+            <h4 class="title"><%= book.title %></h4>
+            <h6 class="author">by <%= book.author %></h6>
+            <p class="description"><%= book.description %></p>
+            </li>
+            <% }) %>
+            </ul>
+    </main>
+
+    <%- include('../layout/footer.ejs') %>
+
+</body>
+
+</html>
