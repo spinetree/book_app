@@ -61,13 +61,20 @@ function searchBooks(request, response){
       const bookList = superagentResults.body.items.map(book => {
         return new Book(book);
       })
+      console.log(bookList);
       response.send(bookList);
     })
+    // .catch(error => {
+    //   errorHandler(error, request, response);
+    // });
 }
 
 // ========== Book Constructor Object ==========
 function Book(infoFromAPI){
-  this.title = infoFromAPI.volumeInfo.title || 'No title available';
+  this.author = infoFromAPI.volumeInfo.authors || 'no author available';
+  this.title = infoFromAPI.volumeInfo.title || 'no title available';
+  this.description = infoFromAPI.volumeInfo.description || 'no description available';
+  this.imgUrl = infoFromAPI.volumeInfo.imageLinks.thumbnail || 'no image available';
 }
 
 
