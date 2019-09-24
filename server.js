@@ -40,8 +40,8 @@ function renderHomePage(request, response){
 function searchBooks(request, response){
   // Set up Google Book API to be used for superagent
   console.log(request.body.search);
-  const searchName = request.body.search[0];
-  const searchBy = request.body.search[1];
+  const searchName = request.body.search;
+  const searchBy = request.body.search;
 
   let url = `https://www.googleapis.com/books/v1/volumes?q=`;
   if(searchBy === 'title'){
