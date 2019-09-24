@@ -22,26 +22,53 @@ app.use(express.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 
 // ========== Routes ==========
-app.get('/', renderHomePage);
 // declare a function renderHomePage that renders search form
+app.get('/', renderHomePage);
 
-// app.post('/searches', searchBooks);
 // declare a function searchBooks that runs Google Book API
+app.post('/searches', searchBooks);
 
 // ========== Catch All Other Routes ==========
 app.get('*', (request, response) => response.status(400).send('This route does not exist'));
 
 
-// ========== Functions ==========
-function renderHomePage(request, response) {
+// ========== Google Book API Functions ==========
+function renderHomePage(request, response){
   response.render('pages/index');
 }
 
-// function hello (request, response){
-//   console.log('this is working');
-// }
+function searchBooks(request, response){
+  // Set up Google Book API to be used for superagent
+  console.log(request.body.search);
+  const searchName = request.body.search[0];
+  const searchBy = request.body.search[1];
 
+  let url = `https://www.googleapis.com/books/v1/volumes?q=`;
+  if(searchBy === 'title'){
+    console.log('search by book title')
+    url = url + `intitle:${searchName}`;
+  }
+  if(searchBy === 'author'){
+    console.log('search by book author')
+    url = url + `inauthor:${searchName}`;
+  }
 
+  // Run superagent to Google Book API
+  superagent.get(url)
+    .then(superagentResults => {
+      console.log(superagentResults.body.items);
+      // For all the return results, map through each of them and make a new Book object
+      const bookList = superagentResults.body.items.map(book => {
+        return new Book(book);
+      })
+      response.send(bookList);
+    })
+}
+
+// ========== Book Constructor Object ==========
+function Book(infoFromAPI){
+  this.title = infoFromAPI.volumeInfo.title || 'No title available';
+}
 
 
 // ========== Error Function ==========
