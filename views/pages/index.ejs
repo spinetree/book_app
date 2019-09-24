@@ -5,14 +5,14 @@
     <%- include('../layout/header.ejs') %>
 
     <main>
-        <form id="booksearch" action="/searches" method="post">
+        <form id="book-search" action="/searches" method="post">
 
             <legend>Search by Title or Author</legend>
 
-            <input type="text" name="bookquery" placeholder="Enter a title or author">
+            <input type="text" name="book-search-box" class="book-search-box" placeholder="Enter a title or author">
 
 
-            <fieldset>
+            <fieldset class="book-radio-buttons">
                 <label>Title:
                     <input type="radio" name="type" value="title">
                 </label>
@@ -24,7 +24,7 @@
             </fieldset>
 
 
-            <button title="search">Search the Google Book API</button>
+            <button type="submit" id="book-search-button">Search the Google Book API</button>
 
 
         </form>
