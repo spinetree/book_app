@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
+const ejs = require('ejs');
 require('dotenv').config();
 
 // ========== Server ==========
@@ -21,7 +22,7 @@ app.use(express.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 
 // ========== Routes ==========
-app.post('/', renderHomePage);
+app.get('/', renderHomePage);
 // declare a function renderHomePage that renders search form
 
 // app.post('/searches', searchBooks);
@@ -36,7 +37,9 @@ function renderHomePage(request, response) {
   response.render('pages/index');
 }
 
-
+// function hello (request, response){
+//   console.log('this is working');
+// }
 
 
 
