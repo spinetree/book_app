@@ -44,4 +44,17 @@ p {
     font-weight: 300;
 }
 
-a {text-decoration:none; font-weight:700; color: #b31b1b;}
+a {
+    text-decoration: none;
+    font-weight: 700;
+    color: #666;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input,
+button {
+    font-size: 18px;
+}
