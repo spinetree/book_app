@@ -12,7 +12,7 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // ========== App Middleware ==========
 app.use(express.static('./public'));
@@ -59,30 +59,31 @@ function searchBooks(request, response){
       console.log(superagentResults.body.items);
       // For all the return results, map through each of them and make a new Book object
       const bookList = superagentResults.body.items.map(book => {
-        return new Book(book);
+        return new Book(book.volumeInfo);
       })
       console.log(bookList);
-      response.send(bookList);
+      response.render('pages/searches/show.ejs', {data:bookList});
     })
-    // .catch(error => {
-    //   errorHandler(error, request, response);
-    // });
+    .catch(error => {
+      errorHandler(error, request, response);
+    });
 }
 
 // ========== Book Constructor Object ==========
 function Book(infoFromAPI){
-  this.author = infoFromAPI.volumeInfo.authors || 'no author available';
-  this.title = infoFromAPI.volumeInfo.title || 'no title available';
-  this.description = infoFromAPI.volumeInfo.description || 'no description available';
-  this.imgUrl = infoFromAPI.volumeInfo.imageLinks.thumbnail || 'no image available';
+  const placeholderImg = 'https://i.imgur.com/J5LVHEL.jpg';
+  let imgLink = infoFromAPI.imageLinks.thumbnail.replace(/^http:/, 'https:');
+  this.author = infoFromAPI.authors ? infoFromAPI.authors : 'no author available';
+  this.title = infoFromAPI.title ? infoFromAPI.title : 'no title available';
+  this.description = infoFromAPI.description ? infoFromAPI.description : 'no description available';
+  this.imgUrl = imgLink ? imgLink : placeholderImg;
 }
 
-
 // ========== Error Function ==========
-// function errorHandler(error, request, response){
-//   console.error(error);
-//   response.status(500).send('Something went wrong');
-// }
+function errorHandler(error, request, response){
+  console.error(error);
+  response.status(500).send('Something went wrong');
+}
 
 // ========== Listen on PORT ==========
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
