@@ -21,3 +21,52 @@ footer {
     color: #dedede;
     padding: 24px;
 }
+
+
+/* ===== search results list ======  */
+
+#book-search-results-list {
+    text-align: center;
+}
+
+/* @media(min-width:640px){
+    #book-search-results-list {
+
+    }
+}
+
+@media(min-width:1024px){
+    #book-search-results-list {
+
+    }
+}
+
+@media(min-width:1280px){
+    #book-search-results-list {
+
+    }
+} */
+
+.book-result {
+    background: #fefefe;
+    padding:24px;
+    /* margin: 32px 0 0 0; */
+}
+
+.book-result .cover-image {
+    width:128px;
+    outline:4px solid #efefef;
+}
+
+.book-result .title {}
+
+.book-result .author {}
+
+.book-result .description {
+
+    max-height: 60px;
+    overflow: hidden;
+    /* white-space: nowrap; */
+    text-overflow: ellipsis;
+
+}
