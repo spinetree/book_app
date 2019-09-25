@@ -18,12 +18,19 @@ const PORT = process.env.PORT || 3001;
 app.use(express.static('./public'));
 app.use(express.urlencoded({extended:true}));
 
+// ========== Database Setup ========== //
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', error => console.log(error));
+
 // ========== Set Views Engine for Templating ========== //
 app.set('view engine', 'ejs');
 
 // ========== Routes ========== //
 // renders Home page that lists all database
-app.get('/', renderHomePage);
+app.get('/', myBookshelf);
+// add new books to database and update Home page
+app.post('/', addBooksToDB);
 // render search form
 app.get('/searches', renderForm);
 // render search results from Google Book API
@@ -33,9 +40,9 @@ app.post('/searches', searchBooks);
 app.get('*', (request, response) => response.status(404).render('pages/error'));
 
 // ========== Render Views ========== //
-function renderHomePage(request, response){
-  response.render('pages/index');
-}
+// function renderHomePage(request, response){
+//   response.render('pages/index');
+// }
 
 function renderForm(request, response){
   response.render('pages/searches/new');
@@ -66,19 +73,28 @@ function searchBooks(request, response){
       const bookList = superagentResults.body.items.map(book => {
         return new Book(book.volumeInfo);
       })
-
       response.render('pages/searches/show.ejs', {data:bookList});
     })
-    .catch(error => {
-      errorHandler(error, request, response);
-    });
+    .catch(error => errorHandler(error, request, response));
 }
 
 // ========== Save Search Results in Database ========== //
-function saveToDatabase(request, response){
-  // let {title, }
+function addBooksToDB(request, response){
+  let {author, title, isbn, image_url, descriptions, bookshelf} = request.body;
+  let sql = 'INSERT INTO books (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+  let values = [author, title, isbn, image_url, descriptions, bookshelf];
+  client.query(sql, values)
+    .then(response.redirect('/'))
+    .catch(error => errorHandler(error, request, response));
 }
 
+// ========== Get Data From Database ========== //
+function myBookshelf(request, response){
+  let sql = 'SELECT * FROM books;';
+  client.query(sql)
+    .then(results => response.render('pages/index', {data: results.rows}))
+    .catch(error => errorHandler(error, request, response));
+}
 
 // ========== Book Constructor Object ========== //
 function Book(infoFromAPI){
