@@ -15,13 +15,11 @@ First, a user needs to git clone our app from our GitHub page. Second, a user ne
 This app is built by HTML, CSS, JavaScirpt, Express.js, EJS, PG, Superagent, and Google Book API.
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with GET and POST routes for the book resource.
+09-24--19 - site started, hits google api but doesnt properly render data yet. So close tho.
 
-## Credits and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
--->
+<!-- ## Credits and Collaborations -->
+
 
 ** --------------------------------------------------------------------------**
 
@@ -33,32 +31,198 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 10:00 am
 
-Finish time: _____
+Finish time: 1030am
 
-Actual time needed to complete: _____
-
-
-
-Number and name of feature: ________________________________
-
-Estimate of time needed to complete: _____
-
-Start time: _____
-
-Finish time: _____
-
-Actual time needed to complete: _____
+Actual time needed to complete: 1hr
 
 
+-------------------
 
-#lab 12
 
-Number and name of feature: ________________________________
+Number and name of feature: #2 Google Books api 
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hour
 
-Start time: _____
+Start time: 10:30
 
-Finish time: _____
+Finish time: 12pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.5 hours
+
+-------------------
+
+
+Number and name of feature: #2 Google Books api 
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 10:30
+
+Finish time: 12pm
+
+Actual time needed to complete: 1.5 hours
+
+-------------------
+ 
+Number and name of feature: 3: browse results
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 12pm
+
+Finish time: not
+
+Actual time needed to complete: n/a
+
+-------------------
+
+Number and name of feature: 4: error view
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 12pm
+
+Finish time: not
+
+Actual time needed to complete: n/a
+
+-------------------
+
+Number and name of feature: 5: style
+
+Estimate of time needed to complete: 1 hour
+
+Start time: n/a
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+## Day 2
+
+Number and name of feature: #1 Display saved books on homepage 
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+-------------------
+
+Number and name of feature: #2 Detail view
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+-------------------
+
+Number and name of feature: #3 Modify book details before adding (from search page, not detail view)
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+-------------------
+
+Number and name of feature: #4 Add new books
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+-------------------
+
+Number and name of feature: 5 Move sql and view rendering into callbacks (?)  
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+-------------------
+
+Number and name of feature: 6 More styling - SMACSS
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+-------------------
+
+## Day 3
+
+Number and name of feature: 1 Update details of books already in db from detail view
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+-------------------
+
+Number and name of feature:  2 Remove books from collection
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+-------------------
+
+Number and name of feature:  3 
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+-------------------
+
+## Day 4
+
+-------------------
+
+Number and name of feature:  1 Normalize the database 
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: n/a
+
+Actual time needed to complete: n/a
+
+-------------------
+
