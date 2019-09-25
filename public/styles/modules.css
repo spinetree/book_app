@@ -6,7 +6,8 @@ header {
 }
 
 header h2 {
-    margin-left: 120px;
+    margin-left: 100px;
+    margin-top:0;
     line-height: 80px;
     color: #dedede;
 }
