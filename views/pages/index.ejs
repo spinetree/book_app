@@ -1,34 +1,11 @@
 <%- include('../layout/head.ejs')  %>
 
-<body class="">
+<body class="front-page">
 
     <%- include('../layout/header.ejs') %>
 
     <main>
-        <form id="book-search" action="/searches" method="post">
-
-            <legend>Search by Title or Author</legend>
-
-            <input type="text" name="search" class="book-search-box" placeholder="Enter a title or author">
-
-
-            <fieldset class="book-radio-buttons">
-                <label>Title:
-                    <input type="radio" name="type" value="title">
-                </label>
-            </fieldset>
-            <fieldset>
-            <label>Author:
-                    <input type="radio" name="type" value="author">
-            </label>
-            </fieldset>
-
-
-            <button type="submit" id="book-search-button">Search the Google Book API</button>
-
-
-        </form>
-
+        <h2>Main page</h2>
     </main>
 
     <%- include('../layout/footer.ejs') %>
