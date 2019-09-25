@@ -62,7 +62,6 @@ function searchBooks(request, response){
         return new Book(book.volumeInfo);
       })
       console.log(bookList);
-      // response.send(bookList);
       response.render('pages/searches/show.ejs', {data:bookList});
     })
     .catch(error => {
