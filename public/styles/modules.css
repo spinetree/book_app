@@ -1,0 +1,19 @@
+/* ===== see nav.css for nav-specific stuff ======  */
+
+header {
+    background: #333;
+    height: 80px;
+}
+
+header h2 {
+    margin-left: 120px;
+    line-height: 80px;
+    color: #dedede;
+}
+
+
+
+/* ===== footer ======  */
+
+footer {min-height:200px; background:#333; color: #dedede; padding:24px;}
+
