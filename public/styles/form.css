@@ -1,0 +1,48 @@
+#book-search {
+    padding: 24px;
+    /* text-align: center; */
+}
+
+fieldset {
+    margin-top: 16px;
+}
+
+legend {width:100%;}
+
+input {}
+
+input[type=text] {
+    line-height: 24px;
+    border: 2px solid #666;
+    padding: 16px;
+    display: block;
+    margin-top: 8px;
+    width:100%;
+}
+
+label {
+    line-height: 16px;
+    margin-top: 16px;
+    display: inline-block;
+}
+
+
+.radio-buttons {
+    text-align: left;
+}
+
+.radio-buttons label {
+    display: block;
+}
+
+
+
+
+button {
+    line-height: 48px;
+    padding: 0 16px;
+    margin-top: 16px;
+    background: #333;
+    color: #dedede;
+    width:100%;
+}
