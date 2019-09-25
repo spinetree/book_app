@@ -7,5 +7,29 @@ body {background:#333;}
 main {
     padding: 24px;
     min-height: 60vh;
-    background: #fefefe;
+    background: #888;;
+}
+
+#book-search-results-list {
+    display: grid;
+    grid-gap:24px;
+    grid-template-columns: 1fr;
+}
+
+@media(min-width:640px){
+    #book-search-results-list {
+    grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(min-width:1024px){
+    #book-search-results-list {
+    grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media(min-width:1280px){
+    #book-search-results-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }

@@ -10,22 +10,22 @@
 
             <fieldset>
             <legend>Search by Title or Author
-            <input type="text" name="search" class="book-search-box" placeholder="Enter a title or author">
+            <input type="text" name="search" class="book-search-box" placeholder="Enter a title or author" tabindex="0">
         </legend>
         </fieldset>
 
 
             <fieldset class="book-radio-buttons radio-buttons">
                 <label>Title:
-                    <input type="radio" name="type" value="title" checked>
+                    <input type="radio" name="type" value="title" tabindex="1" checked>
                 </label>
             <label>Author:
-                    <input type="radio" name="type" value="author">
+                    <input type="radio" name="type" value="author" tabindex="2">
             </label>
             </fieldset>
 
             <fieldset>
-            <button type="submit" id="book-search-button">Search the Google Book API</button>
+            <button type="submit" id="book-search-button" tabindex="4">Search the Google Book API</button>
         </fieldset>
         </form>
 
