@@ -29,7 +29,7 @@ app.get('/', renderHomePage);
 app.post('/searches', searchBooks);
 
 // ========== Catch All Other Routes ==========
-app.get('*', (request, response) => response.status(400).send('This route does not exist'));
+app.get('*', (request, response) => response.status(404).render('pages/error'));
 
 
 // ========== Google Book API Functions ==========
@@ -82,7 +82,7 @@ function Book(infoFromAPI){
 // ========== Error Function ==========
 function errorHandler(error, request, response){
   console.error(error);
-  response.status(500).send('Something went wrong');
+  response.status(500).send('something went wrong');
 }
 
 // ========== Listen on PORT ==========
