@@ -31,9 +31,9 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 10:00 am
 
-Finish time: 1030am
+Finish time: 10:30 am
 
-Actual time needed to complete: 1hr
+Actual time needed to complete: 30 minutes
 
 
 -------------------
@@ -43,32 +43,20 @@ Number and name of feature: #2 Google Books api
 
 Estimate of time needed to complete: 1 hour
 
-Start time: 10:30
+Start time: 10:30 am
 
-Finish time: 12pm
-
-Actual time needed to complete: 1.5 hours
-
--------------------
-
-
-Number and name of feature: #2 Google Books api 
-
-Estimate of time needed to complete: 1 hour
-
-Start time: 10:30
-
-Finish time: 12pm
+Finish time: 12:00 pm
 
 Actual time needed to complete: 1.5 hours
 
 -------------------
- 
+
+
 Number and name of feature: 3: browse results
 
 Estimate of time needed to complete: 1 hour
 
-Start time: 12pm
+Start time: 12:00 pm
 
 Finish time: not
 
@@ -80,7 +68,7 @@ Number and name of feature: 4: error view
 
 Estimate of time needed to complete: 1 hour
 
-Start time: 12pm
+Start time: 12 pm
 
 Finish time: not
 
@@ -98,13 +86,15 @@ Finish time: n/a
 
 Actual time needed to complete: n/a
 
-## Day 2
+** --------------------------------------------------------------------------**
+
+# lab 12
 
 Number and name of feature: #1 Display saved books on homepage 
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 40 minutes
 
-Start time: 
+Start time: 9:30 am
 
 Finish time: n/a
 
@@ -170,9 +160,9 @@ Finish time: n/a
 
 Actual time needed to complete: n/a
 
--------------------
+** --------------------------------------------------------------------------**
 
-## Day 3
+# lab 13
 
 Number and name of feature: 1 Update details of books already in db from detail view
 
@@ -208,9 +198,9 @@ Finish time: n/a
 
 Actual time needed to complete: n/a
 
--------------------
+** --------------------------------------------------------------------------**
 
-## Day 4
+# lab 14
 
 -------------------
 
