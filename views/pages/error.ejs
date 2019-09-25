@@ -1,14 +1,14 @@
-<% include('head.ejs') %>
+<% include('../layout/head.ejs') %>
 
-<body class="">
+<body class="error-page">
 
-    <% include('header.ejs') %>
+    <% include('../layout/header.ejs') %>
 
     <main>
-        <p>This is an error page</p>
+        <article class="error"><% error  %></p>
     </main>
 
-    <% include('footer.ejs') %>
+    <% include('../layout/footer.ejs') %>
 
 </body>
 
