@@ -23,7 +23,7 @@ footer {
 }
 
 
-/* ===== grid of books - search results and my library ======  */
+/* ===== grid of books - search results and my bookshelf ======  */
 
 .book-grid {
     text-align: center;
@@ -53,8 +53,7 @@ footer {
 }
 
 
-.book-result .description {
-
+.book-result .descriptions {
     max-height: 60px;
     overflow: hidden;
     /* white-space: nowrap; */
@@ -64,7 +63,7 @@ footer {
 }
 
 
-#my-library>header {
+#my-bookshelf>header {
     border-bottom: 2px dotted #666;
     padding-bottom: 24px;
     margin-bottom: 24px;

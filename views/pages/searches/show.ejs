@@ -8,16 +8,16 @@
         <ul id="book-search-results-list" class="book-grid">
 
             <% 
-            // console.log(data); 
+            console.log(data); 
             data.forEach(book => { %>
             <li class="book-result">
             <img class="cover-image" src="<%= book.image_url %>" />
             <h4 class="title"><%= book.title %></h4>
             <h5 class="author">by <%= book.author %></h5>
-            <p class="description"><%= book.descriptions %></p>
-            <a class="save button-secondary" href="/books/save/<%= book.book_index %>">+ Add to my library</a>
-   
+            <p class="descriptions"><%= book.descriptions %></p>
+            <a class="save button-secondary" href="/books/save/<%= book.book_index %>">+ Add to my bookshelf</a>
             </li>
+
             <% }) %>
         </ul>
     </main>
