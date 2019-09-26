@@ -14,8 +14,9 @@
             <img class="cover-image" src="<%= book.image_url %>" />
             <h4 class="title"><%= book.title %></h4>
             <h5 class="author">by <%= book.author %></h5>
-            <p class="description"><%= book.description %></p>
-
+            <p class="description"><%= book.descriptions %></p>
+            <a class="save button-secondary" href="/books/save/<%= book.book_index %>">+ Add to my library</a>
+   
             </li>
             <% }) %>
         </ul>
