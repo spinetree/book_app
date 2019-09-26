@@ -120,7 +120,7 @@ function Book(infoFromAPI, i){
   this.author = infoFromAPI.authors ? infoFromAPI.authors : 'no author available';
   this.title = infoFromAPI.title ? infoFromAPI.title : 'no title available';
   this.isbn = isbnData.type + isbnData.identifier ? isbnData.type + isbnData.identifier : 'no ISBN available';
-  this.description = infoFromAPI.description ? infoFromAPI.description : 'no description available';
+  this.descriptions = infoFromAPI.descriptions ? infoFromAPI.descriptions : 'no description available';
   this.image_url = imgLink ? imgLink : placeholderImg;
   this.tempId = i;
 }
