@@ -1,13 +1,12 @@
 /* ===== see nav.css for nav-specific stuff ======  */
 
-header {
+.page-header {
     background: #333;
     height: 80px;
 }
 
-header h2 {
-    margin-left: 100px;
-    margin-top:0;
+.page-header h2 {
+    margin: 0 0 0 120px;
     line-height: 80px;
     color: #dedede;
 }
@@ -24,29 +23,11 @@ footer {
 }
 
 
-/* ===== search results list ======  */
+/* ===== grid of books - search results and my library ======  */
 
-#book-search-results-list {
+.book-grid {
     text-align: center;
 }
-
-/* @media(min-width:640px){
-    #book-search-results-list {
-
-    }
-}
-
-@media(min-width:1024px){
-    #book-search-results-list {
-
-    }
-}
-
-@media(min-width:1280px){
-    #book-search-results-list {
-
-    }
-} */
 
 .book-result {
     background: #fefefe;
@@ -66,12 +47,11 @@ footer {
     outline:4px solid #efefef;
 }
 
-.book-result .title {}
-
 .book-result .author {
     padding-bottom:16px;
     border-bottom:1px dotted #ccc;
 }
+
 
 .book-result .description {
 
@@ -79,5 +59,11 @@ footer {
     overflow: hidden;
     /* white-space: nowrap; */
     text-overflow: ellipsis;
-
 }
+
+
+#my-library > header {
+    border-bottom:2px dotted #666;
+    padding-bottom:24px;
+    margin-bottom:24px;
+} 

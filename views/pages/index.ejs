@@ -4,9 +4,33 @@
 
     <%- include('../layout/header.ejs') %>
 
-    
+
     <main>
-        <h2>Main page</h2>
+
+
+        <section id="my-library">
+            
+            <header>
+                <h2>My Library</h2>
+            </header>
+
+            <ul id="library-list" class="book-grid">
+
+                <% 
+                        // console.log(data); 
+                        data.forEach(book => { %>
+                <li class="book-result">
+                    <img class="cover-image" src="<%= book.image_url %>" />
+                    <h4 class="title"><%= book.title %></h4>
+                    <h5 class="author">by <%= book.author %></h5>
+                    <p class="description"><%= book.description %></p>
+                    <a class="details button-secondary" href="/books/detail/<%= book.id %>">View Details</a>
+                </li>
+                <% }) %>
+            </ul>
+
+        </section>
+
     </main>
 
     <%- include('../layout/footer.ejs') %>
