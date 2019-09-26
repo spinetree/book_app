@@ -34,7 +34,7 @@ app.post('/searches', searchBooks);
 // add a new book to database and redirect to Home page
 app.get('/searches/add/:book_index', addBooksToDB);
 // select a book on Home page to show a detail view
-app.get('/books/:book_id', viewOneBook);
+app.get('/books/detail/:book_id', viewOneBook);
 
 // ========== Catch All Other Routes ========== //
 app.get('*', (request, response) => response.status(404).render('pages/error'));
