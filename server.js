@@ -100,7 +100,7 @@ function addBooksToDB(request, response){
   let sql = 'INSERT INTO books (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
   let values = [bookArray[bookIndex].author, bookArray[bookIndex].title, bookArray[bookIndex].isbn, bookArray[bookIndex].image_url, bookArray[bookIndex].descriptions, bookArray[bookIndex].bookshelf];
   client.query(sql, values)
-    .then(response.redirect('/'))
+    .then(response.redirect('/books/detail/:book_id'))
     .catch(error => errorHandler(error, request, response));
 }
 
