@@ -35,10 +35,23 @@ footer {
     /* margin: 32px 0 0 0; */
 }
 
+.book-results .cover-container {
+
+    height:300px;
+    /* display:block; */
+
+}
+
 .book-result .cover-image {
     width:128px;
     outline:4px solid #efefef;
 }
+
+.book-result .author {
+    padding-bottom:16px;
+    border-bottom:1px dotted #ccc;
+}
+
 
 .book-result .description {
 
