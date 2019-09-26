@@ -32,7 +32,7 @@ app.get('/searches/new', renderForm);
 // render search results from Google Book API
 app.post('/searches', searchBooks);
 // add a new book to database and redirect to Home page
-app.get('/searches/add/:book_index', addBooksToDB);
+app.get('/books/add/:book_index', addBooksToDB);
 // select a book on Home page to show a detail view
 app.get('/books/detail/:book_id', viewOneBook);
 
