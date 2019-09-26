@@ -6,7 +6,8 @@ header {
 }
 
 header h2 {
-    margin-left: 120px;
+    margin-left: 100px;
+    margin-top:0;
     line-height: 80px;
     color: #dedede;
 }
@@ -53,6 +54,13 @@ footer {
     /* margin: 32px 0 0 0; */
 }
 
+.book-results .cover-container {
+
+    height:300px;
+    /* display:block; */
+
+}
+
 .book-result .cover-image {
     width:128px;
     outline:4px solid #efefef;
@@ -60,7 +68,10 @@ footer {
 
 .book-result .title {}
 
-.book-result .author {}
+.book-result .author {
+    padding-bottom:16px;
+    border-bottom:1px dotted #ccc;
+}
 
 .book-result .description {
 

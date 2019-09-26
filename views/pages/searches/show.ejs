@@ -11,13 +11,15 @@
             console.log(data); 
             data.forEach(book => { %>
             <li class="book-result">
-            <img class="cover-image" src="<%= book.imgUrl %>" />
-            <h4 class="title"><%= book.title %></h4>
-            <h5 class="author">by <%= book.author %></h5>
-            <p class="description"><%= book.description %></p>
+                <div class="cover-container">
+                    <img class="cover-image" src="<%= book.imgUrl %>" />
+                </div>
+                <h4 class="title"><%= book.title %></h4>
+                <h5 class="author">by <%= book.author %></h5>
+                <p class="description"><%= book.description %></p>
             </li>
             <% }) %>
-            </ul>
+        </ul>
     </main>
 
     <%- include('../../layout/footer.ejs') %>
