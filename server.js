@@ -27,25 +27,29 @@ app.set('view engine', 'ejs');
 // ========== Routes ========== //
 // renders Home page that lists all database
 app.get('/', myBookshelf);
-// add new books to database and update Home page
-app.post('/', addBooksToDB);
 // render search form
 app.get('/searches/new', renderForm);
 // render search results from Google Book API
 app.post('/searches', searchBooks);
-// add a new book to database using this params
-app.get('/searches')
+// add a new book to database and redirect to Home page
+app.get('/searches/add/:book_index', addBooksToDB);
+// select a book on Home page to show a detail view
+app.get('/pages/books/:book_id', viewOneBook);
 
 // ========== Catch All Other Routes ========== //
 app.get('*', (request, response) => response.status(404).render('pages/error'));
 
 // ========== Render Views ========== //
-// function renderHomePage(request, response){
-//   response.render('pages/index');
-// }
-
 function renderForm(request, response){
   response.render('pages/searches/new');
+}
+
+// ========== Get Data From Database ========== //
+function myBookshelf(request, response){
+  let sql = 'SELECT * FROM books;';
+  client.query(sql)
+    .then(results => response.render('pages/index', {data: results.rows}))
+    .catch(error => errorHandler(error, request, response));
 }
 
 // ========== Google API Function ========== //
@@ -69,10 +73,12 @@ function searchBooks(request, response){
   superagent.get(url)
     .then(superagentResults => {
       console.log('ISBN', superagentResults.body.items[0].volumeInfo.industryIdentifiers[0]);
-      // For all the return results, map through each of them and make a new Book object
+      // Set i = 0 for now, when a new search result is rendered, a temp id "i" is assigned to each of the result. We use this temp id for request.params so we know which one to save to db.
       let i = 0;
+      // For all the return results, map through each of them and make a new Book object
       return superagentResults.body.items.map(book => {
         i++;
+        // pass search result object and temp id to constructor function
         return new Book(book.volumeInfo, i);
       })
     })
@@ -83,9 +89,11 @@ function searchBooks(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
-// ========== Save New Book in Database ========== //
+// ========== Save a New Book in Database ========== //
+// All the search results are saved here in bookArray ready for us to grab and save to db.
 let bookArray = [];
 function addBooksToDB(request, response){
+  // This is the index number for the book that is clicked to be added
   const bookIndex = request.params.book_index;
   console.log(bookIndex);
   let sql = 'INSERT INTO books (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
@@ -95,11 +103,12 @@ function addBooksToDB(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
-// ========== Get Data From Database ========== //
-function myBookshelf(request, response){
-  let sql = 'SELECT * FROM books;';
-  client.query(sql)
-    .then(results => response.render('pages/index', {data: results.rows}))
+// ========== View a book in a detailed view ========== //
+function viewOneBook(request, response){
+  let sql = 'SELECT * FROM books WHERE id=$1;';
+  let values = [request.params.book_id];
+  client.query(sql, values)
+    .then(result => response.render('pages/books/show', {book: result.rows[0]}))
     .catch(error => errorHandler(error, request, response));
 }
 
@@ -112,7 +121,7 @@ function Book(infoFromAPI, i){
   this.title = infoFromAPI.title ? infoFromAPI.title : 'no title available';
   this.isbn = isbnData.type + isbnData.identifier ? isbnData.type + isbnData.identifier : 'no ISBN available';
   this.description = infoFromAPI.description ? infoFromAPI.description : 'no description available';
-  this.imgUrl = imgLink ? imgLink : placeholderImg;
+  this.image_url = imgLink ? imgLink : placeholderImg;
   this.tempId = i;
 }
 
