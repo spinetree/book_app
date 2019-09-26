@@ -30,7 +30,7 @@ app.get('/', myBookshelf);
 // add new books to database and update Home page
 app.post('/', addBooksToDB);
 // render search form
-app.get('/searches', renderForm);
+app.get('/searches/new', renderForm);
 // render search results from Google Book API
 app.post('/searches', searchBooks);
 // add a new book to database using this params
