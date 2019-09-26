@@ -30,7 +30,7 @@ app.get('/', myBookshelf);
 // add new books to database and update Home page
 app.post('/', addBooksToDB);
 // render search form
-app.get('/searches', renderForm);
+app.get('/searches/new', renderForm);
 // render search results from Google Book API
 app.post('/searches', searchBooks);
 // add a new book to database using this params
@@ -68,12 +68,17 @@ function searchBooks(request, response){
   // Run superagent to Google Book API
   superagent.get(url)
     .then(superagentResults => {
-      console.log('THIS IS WHAT YOU ARE LOOKING FOR:', superagentResults.body.items[0].volumeInfo.industryIdentifiers[0]);
+      console.log('ISBN', superagentResults.body.items[0].volumeInfo.industryIdentifiers[0]);
       // For all the return results, map through each of them and make a new Book object
-      const bookList = superagentResults.body.items.map(book => {
-        return new Book(book.volumeInfo);
+      let i = 0;
+      return superagentResults.body.items.map(book => {
+        i++;
+        return new Book(book.volumeInfo, i);
       })
-      response.render('pages/searches/show.ejs', {data:bookList});
+    })
+    .then(result => {
+      bookArray = result;
+      response.render('pages/searches/show.ejs', {data:result});
     })
     .catch(error => errorHandler(error, request, response));
 }
