@@ -3,7 +3,7 @@
 # Project Name
 
 **Author**: Karina Chen, Steve Rokitka
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.1 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
 This app is a website that you can search all the Google books by the title or arthur of the book. The website is set up to have a form for users to input the title or the arthur of the book they want to search for. Then the website uses Google Book API to search for the books. The search result shows the book title and the arthur of the books the users searched. The search results will be saved in database to reduce the number of times the Google Book API is run. The app is built with a local server that uses EJS to render html files.
@@ -16,9 +16,12 @@ This app is built by HTML, CSS, JavaScirpt, Express.js, EJS, PG, Superagent, and
 
 ## Change Log
 
-09-24--19 - site started, hits google api but doesnt properly render data yet. So close tho.
+09-24-19 - site started, hits google api but doesnt properly render data yet. So close tho.
+09-25-19 - site has a db and can take searches and display them, not writing to the db yet
 
 <!-- ## Credits and Collaborations -->
+ Nav sourced from https://codepen.io/erikterwan/pen/EVzeRP 
+
 
 
 ** --------------------------------------------------------------------------**
@@ -58,9 +61,9 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 12:00 pm
 
-Finish time: not
+Finish time: 9pm 
 
-Actual time needed to complete: n/a
+Actual time needed to complete: 3 hours
 
 -------------------
 
@@ -70,9 +73,9 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 12 pm
 
-Finish time: not
+Finish time: 8pm that night
 
-Actual time needed to complete: n/a
+Actual time needed to complete: 30 mins
 
 -------------------
 
@@ -80,11 +83,11 @@ Number and name of feature: 5: style
 
 Estimate of time needed to complete: 1 hour
 
-Start time: n/a
+Start time: 8am today
 
-Finish time: n/a
+Finish time: 5pm, working on and off
 
-Actual time needed to complete: n/a
+Actual time needed to complete: 2 hours
 
 ** --------------------------------------------------------------------------**
 
@@ -104,7 +107,7 @@ Actual time needed to complete: n/a
 
 Number and name of feature: #2 Detail view
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1 hour
 
 Start time: 
 
@@ -116,7 +119,7 @@ Actual time needed to complete: n/a
 
 Number and name of feature: #3 Modify book details before adding (from search page, not detail view)
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1.5 hours
 
 Start time: 
 
@@ -128,7 +131,7 @@ Actual time needed to complete: n/a
 
 Number and name of feature: #4 Add new books
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 2 hours
 
 Start time: 
 
