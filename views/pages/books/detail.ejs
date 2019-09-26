@@ -7,10 +7,8 @@
 
     <main>
         <header>
-                <h2>books detail page</h2>
+            <a class="detail-backlink" href="/">< back to my bookshelf</a>
         </header>
-        
-
 
         <img class="cover-image" src="<%= book.image_url %>" />
         <h2 class="title"><%= book.title %></h2>
@@ -18,7 +16,6 @@
         <p class="isbn"><%= book.isbn %></p>
         <p class="descriptions"><%= book.descriptions %></p>
 
-        <a class="detail-backlink" href="/">< back to my bookshelf</a>
     </main>
 
     <%- include('../../layout/footer.ejs') %>
