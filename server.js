@@ -108,7 +108,7 @@ function viewOneBook(request, response){
   let sql = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.book_id];
   client.query(sql, values)
-    .then(result => response.render('pages/books/show', {book: result.rows[0]}))
+    .then(result => response.render('pages/books/detail', {book: result.rows[0]}))
     .catch(error => errorHandler(error, request, response));
 }
 
