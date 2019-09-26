@@ -2,16 +2,14 @@
 
 // ========== Dependencies ========== //
 const express = require('express');
-const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
-const ejs = require('ejs');
+
+// ========== Environment Variable ========== //
 require('dotenv').config();
 
 // ========== Server ========== //
 const app = express();
-app.use(cors());
-
 const PORT = process.env.PORT || 3001;
 
 // ========== App Middleware ========== //
@@ -35,6 +33,8 @@ app.post('/', addBooksToDB);
 app.get('/searches', renderForm);
 // render search results from Google Book API
 app.post('/searches', searchBooks);
+// add a new book to database using this params
+app.get('/searches')
 
 // ========== Catch All Other Routes ========== //
 app.get('*', (request, response) => response.status(404).render('pages/error'));
@@ -78,11 +78,13 @@ function searchBooks(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
-// ========== Save Search Results in Database ========== //
+// ========== Save New Book in Database ========== //
+let bookArray = [];
 function addBooksToDB(request, response){
-  let {author, title, isbn, image_url, descriptions, bookshelf} = request.body;
+  const bookIndex = request.params.book_index;
+  console.log(bookIndex);
   let sql = 'INSERT INTO books (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
-  let values = [author, title, isbn, image_url, descriptions, bookshelf];
+  let values = [bookArray[bookIndex].author, bookArray[bookIndex].title, bookArray[bookIndex].isbn, bookArray[bookIndex].image_url, bookArray[bookIndex].descriptions, bookArray[bookIndex].bookshelf];
   client.query(sql, values)
     .then(response.redirect('/'))
     .catch(error => errorHandler(error, request, response));
@@ -97,7 +99,7 @@ function myBookshelf(request, response){
 }
 
 // ========== Book Constructor Object ========== //
-function Book(infoFromAPI){
+function Book(infoFromAPI, i){
   const placeholderImg = 'https://i.imgur.com/J5LVHEL.jpg';
   let imgLink = infoFromAPI.imageLinks.thumbnail.replace(/^http:/, 'https:');
   let isbnData = infoFromAPI.industryIdentifiers[0];
@@ -106,11 +108,12 @@ function Book(infoFromAPI){
   this.isbn = isbnData.type + isbnData.identifier ? isbnData.type + isbnData.identifier : 'no ISBN available';
   this.description = infoFromAPI.description ? infoFromAPI.description : 'no description available';
   this.imgUrl = imgLink ? imgLink : placeholderImg;
+  this.tempId = i;
 }
 
 // ========== Error Function ========== //
 function errorHandler(error, request, response){
-  // console.error(error);
+  console.error(error);
   response.status(500).send('something went wrong');
 }
 
