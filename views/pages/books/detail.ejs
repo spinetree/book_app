@@ -1,12 +1,14 @@
-<%- include('../layout/head.ejs')  %>
+<%- include('../../layout/head.ejs')  %>
 
 <body class="books-detail">
 
 
-    <%- include('../layout/header.ejs') %>
+    <%- include('../../layout/header.ejs') %>
 
     <main>
-        books detail page
+        <header>
+                <h2>books detail page</h2>
+        </header>
 
         <% console.log(data) %>
         
@@ -16,11 +18,9 @@
         <p class="isbn"><%= book.isbn %></p>
         <p class="description"><%= book.description %></p>
 
-
-
     </main>
 
-    <%- include('../layout/footer.ejs') %>
+    <%- include('../../layout/footer.ejs') %>
 
 </body>
 
