@@ -2,8 +2,9 @@
 
 // ========== Dependencies ========== //
 const express = require('express');
-const superagent = require('superagent');
+const methodOverride = require('method-override');
 const pg = require('pg');
+const superagent = require('superagent');
 
 // ========== Environment Variable ========== //
 require('dotenv').config();
@@ -32,7 +33,7 @@ app.get('/searches/new', renderForm);
 // render search results from Google Book API
 app.post('/searches', searchBooks);
 // add a new book to database and redirect to Home page
-app.get('/books/add/:book_index', addBooksToDB);
+app.get('/books/save/:book_index', addBooksToDB);
 // select a book on Home page to show a detail view
 app.get('/books/detail/:book_id', viewOneBook);
 
@@ -103,14 +104,6 @@ function addBooksToDB(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
-// // ========== Total Books in Database ========== //
-// function totalNumberOfBooks(request, response){
-//   let totalBooks = 'SELECT COUNT(*) FROM books';
-//   client.query(totalBooks)
-//     .then(result => response.render('pages/index', {totalBooks: result}))
-//     .catch(error => errorHandler(error, request, response));
-// }
-
 // ========== View a book in a detailed view ========== //
 function viewOneBook(request, response){
   let sql = 'SELECT * FROM books WHERE id=$1;';
@@ -125,7 +118,7 @@ function Book(infoFromAPI, i){
   const placeholderImg = 'https://i.imgur.com/J5LVHEL.jpg';
   let imgLink = infoFromAPI.imageLinks.thumbnail.replace(/^http:/, 'https:');
   let isbnData = infoFromAPI.industryIdentifiers[0];
-  this.author = infoFromAPI.authors ? infoFromAPI.authors : 'no author available';
+  this.author = infoFromAPI.authors[0] ? infoFromAPI.authors[0] : 'no author available';
   this.title = infoFromAPI.title ? infoFromAPI.title : 'no title available';
   this.isbn = isbnData.type + isbnData.identifier ? isbnData.type + isbnData.identifier : 'no ISBN available';
   this.descriptions = infoFromAPI.descriptions ? infoFromAPI.descriptions : 'no description available';
