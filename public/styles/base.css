@@ -5,3 +5,5 @@
 @import url('modules.css');
 @import url('nav.css');
 @import url('icons.css');
+
+* {transition: all ease-in-out 250ms;}
