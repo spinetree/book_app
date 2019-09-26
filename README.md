@@ -17,7 +17,7 @@ This app is built by HTML, CSS, JavaScirpt, Express.js, EJS, PG, Superagent, and
 ## Change Log
 
 09-24-19 - site started, hits google api but doesnt properly render data yet. So close tho.
-09-25-19 - site has a db and can take searches and display them, not writing to the db yet
+09-25-19 - site has a db that displays and detail view. next write/add
 
 <!-- ## Credits and Collaborations -->
  Nav sourced from https://codepen.io/erikterwan/pen/EVzeRP 
@@ -99,9 +99,9 @@ Estimate of time needed to complete: 40 minutes
 
 Start time: 9:30 am
 
-Finish time: n/a
+Finish time: 9pm
 
-Actual time needed to complete: n/a
+Actual time needed to complete: 11.5 hours, give or take (okay there were breaks)
 
 -------------------
 
@@ -109,11 +109,11 @@ Number and name of feature: #2 Detail view
 
 Estimate of time needed to complete: 1 hour
 
-Start time: 
+Start time: 7pm
 
-Finish time: n/a
+Finish time: 9pm
 
-Actual time needed to complete: n/a
+Actual time needed to complete: 2 hours
 
 -------------------
 
@@ -155,13 +155,13 @@ Actual time needed to complete: n/a
 
 Number and name of feature: 6 More styling - SMACSS
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1.5 hours
 
-Start time: 
+Start time: 7pm
 
-Finish time: n/a
+Finish time: 8pm
 
-Actual time needed to complete: n/a
+Actual time needed to complete: 1 hours
 
 ** --------------------------------------------------------------------------**
 
