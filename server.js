@@ -73,8 +73,8 @@ function searchBooks(request, response){
   superagent.get(url)
     .then(superagentResults => {
       console.log('ISBN', superagentResults.body.items[0].volumeInfo.industryIdentifiers[0]);
-      // Set i = 0 for now, when a new search result is rendered, a temp id "i" is assigned to each of the result. We use this temp id for request.params so we know which one to save to db.
-      let i = 0;
+      // Set i = -1 for now, when a new search result is rendered, a temp id "i" is assigned to each of the result. We use this temp id for request.params so we know which one to save to db.
+      let i = -1;
       // For all the return results, map through each of them and make a new Book object
       return superagentResults.body.items.map(book => {
         i++;
@@ -84,7 +84,7 @@ function searchBooks(request, response){
     })
     .then(result => {
       bookArray = result;
-      response.render('pages/searches/show.ejs', {data:result});
+      response.render('pages/searches/show.ejs', {data: result});
     })
     .catch(error => errorHandler(error, request, response));
 }
@@ -102,6 +102,14 @@ function addBooksToDB(request, response){
     .then(response.redirect('/'))
     .catch(error => errorHandler(error, request, response));
 }
+
+// // ========== Total Books in Database ========== //
+// function totalNumberOfBooks(request, response){
+//   let totalBooks = 'SELECT COUNT(*) FROM books';
+//   client.query(totalBooks)
+//     .then(result => response.render('pages/index', {totalBooks: result}))
+//     .catch(error => errorHandler(error, request, response));
+// }
 
 // ========== View a book in a detailed view ========== //
 function viewOneBook(request, response){
@@ -128,7 +136,7 @@ function Book(infoFromAPI, i){
 // ========== Error Function ========== //
 function errorHandler(error, request, response){
   console.error(error);
-  response.status(500).send('something went wrong');
+  response.status(500).render('pages/error');
 }
 
 // ========== Listen on PORT ==========
