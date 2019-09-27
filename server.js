@@ -39,12 +39,14 @@ app.get('/', myBookshelf);
 app.get('/searches/new', renderForm);
 // render search results from Google Book API
 app.post('/searches', searchBooks);
+// update information of books
+app.put('/update/:book_id', updateBooks);
 // add a new book to database and redirect to Home page
 app.get('/books/save/:book_index', addBooksToDB);
 // select a book on Home page to show a detail view
 app.get('/books/detail/:book_id', viewOneBook);
-// update information of books
-app.put('/update/:book_id', updateBooks);
+// delete a book from database on home page
+app.get('/books/delete/:book_id', deleteBook);
 
 // ========== Catch All Other Routes ========== //
 app.get('*', (request, response) => response.status(404).render('pages/error'));
@@ -99,6 +101,21 @@ function searchBooks(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
+// ========== Update Book Information ========== //
+function updateBooks(request, response){
+  let id = request.params.book_id;
+  let {author, title, isbn, descriptions, image_url} = request.body;
+  console.log('THE BOOK ID IS:', id);
+
+  let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, descriptions=$4, image_url=$5 WHERE id=$6;';
+  let values = [author, title, isbn, descriptions, image_url, request.params.book_id];
+  client.query(sql, values)
+
+  // REDIRECT TO ADD BOOKS TO DATABASE ???
+    .then(response.redirect(`/update/${request.params.book_id}`))
+    .catch(error => errorHandler(error, request, response));
+}
+
 // ========== Save a New Book in Database ========== //
 // All the search results are saved here in bookArray ready for us to grab and save to db.
 let bookArray = [];
@@ -110,12 +127,12 @@ function addBooksToDB(request, response){
   let values = [bookArray[bookIndex].author, bookArray[bookIndex].title, bookArray[bookIndex].isbn, bookArray[bookIndex].image_url, bookArray[bookIndex].descriptions, bookArray[bookIndex].bookshelf];
   client.query(sql, values)
 
-  // NEED TO FIX BOOK ID HERE
-    .then(response.redirect(`/books/detail/${book_id}`))
+  // REDIRECT TO VIDE DETAIL OF NEWLY ADDED BOOK ???
+    .then(response.redirect(`/books/detail/${bookIndex}`))
     .catch(error => errorHandler(error, request, response));
 }
 
-// ========== View a book in a detailed view ========== //
+// ========== View a Book in a Detailed View ========== //
 function viewOneBook(request, response){
   let sql = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.book_id];
@@ -124,16 +141,12 @@ function viewOneBook(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
-// ========== Update Book Information ========== //
-function updateBooks(request, response){
-  let id = request.params.book_id;
-  let {author, title, isbn, descriptions, image_url} = request.body;
-  console.log('THE BOOK ID IS:', id);
-
-  let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, descriptions=$4, image_url=$5 WHERE id=$6;';
-  let values = [author, title, isbn, descriptions, image_url, request.params.book_id];
+// ========== Delete a Book From Database ========== //
+function deleteBook(request, response){
+  let sql = 'DELETE FROM books WHERE id=$1;';
+  let values = [request.params.book_id];
   client.query(sql, values)
-    .then(response.redirect(`/update/${request.params.book_id}`))
+    .then(response.redirect('/'))
     .catch(error => errorHandler(error, request, response));
 }
 
