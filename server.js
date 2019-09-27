@@ -153,15 +153,62 @@ function deleteBook(request, response){
 // ========== Book Constructor Object ========== //
 function Book(infoFromAPI, i){
   console.log('THIS IS INFO FROM API:', infoFromAPI);
+  // Trimming Data
   const placeholderImg = 'https://i.imgur.com/J5LVHEL.jpg';
-  let imgLink = infoFromAPI.imageLinks.thumbnail.replace(/^http:/, 'https:');
-  let isbnData = infoFromAPI.industryIdentifiers[0];
-  let trimArthor = infoFromAPI.authors.toString(' , ');
-  this.author = trimArthor ? trimArthor : 'no author available';
+  let imgLink = (infoFromAPI) => {
+    if (infoFromAPI.imageLinks){
+      if (infoFromAPI.imageLinks.thumbnail){
+        let link = infoFromAPI.imageLinks.thumbnail.replace(/^http:/, 'https:');
+        return link;
+      }
+      else {
+        let link = infoFromAPI.imageLinks.smallThumbnail.replace(/^http:/, 'https:');
+        return link;
+      }
+    }
+    else {
+      return 'https://i.imgur.com/J5LVHEL.jpg';
+    }
+  };
+
+  let isbnData = (infoFromAPI) => {
+    if (infoFromAPI.industryIdentifiers) {
+      let isbn = infoFromAPI.industryIdentifiers[0].type + infoFromAPI.industryIdentifiers[0].identifier;
+      return isbn;
+    }
+    else {
+      return 'no ISBN available';
+    }
+  };
+
+  let trimArthor = (infoFromAPI) => {
+    if (infoFromAPI.authors){
+      let person = infoFromAPI.authors.toString(' , ');
+      return person;
+    }
+    else {
+      return 'no author available';
+    }
+  };
+
+  let summary = (infoFromAPI) => {
+    if (infoFromAPI.descriptions){
+      return infoFromAPI.descriptions;
+    }
+    else if (infoFromAPI.description){
+      return infoFromAPI.description;
+    }
+    else {
+      return 'no description available';
+    }
+  };
+
+  // Book Constructor Object
+  this.author = trimArthor(infoFromAPI);
   this.title = infoFromAPI.title ? infoFromAPI.title : 'no title available';
-  this.isbn = isbnData.type + isbnData.identifier ? isbnData.type + isbnData.identifier : 'no ISBN available';
-  this.descriptions = infoFromAPI.descriptions ? infoFromAPI.descriptions : 'no description available';
-  this.image_url = imgLink ? imgLink : placeholderImg;
+  this.isbn = isbnData(infoFromAPI);
+  this.descriptions = summary(infoFromAPI);
+  this.image_url = imgLink(infoFromAPI);
   this.tempId = i;
 }
 
