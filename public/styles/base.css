@@ -7,3 +7,9 @@
 @import url('icons.css');
 
 * {transition: all ease-in-out 250ms;}
+
+body {background:#333;}
+
+main {
+    background: #bbb;
+}

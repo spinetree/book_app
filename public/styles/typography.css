@@ -62,9 +62,10 @@ p {
 
 a {
     text-decoration: none;
-    font-weight: 700;
     color: #666;
 }
+
+
 
 a:hover {
     /* text-decoration: underline; */
