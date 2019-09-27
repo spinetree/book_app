@@ -16,6 +16,13 @@ const PORT = process.env.PORT || 3001;
 // ========== App Middleware ========== //
 app.use(express.static('./public'));
 app.use(express.urlencoded({extended:true}));
+app.use(methodOverride((request, response) => {
+  if(request.body && typeof request.body === 'object' && '_method' in request.body) {
+    let method = request.body._method;
+    delete request.body._method;
+    return method;
+  }
+}))
 
 // ========== Database Setup ========== //
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -36,6 +43,8 @@ app.post('/searches', searchBooks);
 app.get('/books/save/:book_index', addBooksToDB);
 // select a book on Home page to show a detail view
 app.get('/books/detail/:book_id', viewOneBook);
+// update information of books
+app.put('/update/:book_id', updateBooks);
 
 // ========== Catch All Other Routes ========== //
 app.get('*', (request, response) => response.status(404).render('pages/error'));
@@ -96,11 +105,13 @@ let bookArray = [];
 function addBooksToDB(request, response){
   // This is the index number for the book that is clicked to be added
   const bookIndex = request.params.book_index;
-  console.log(bookIndex);
+  console.log('BOOK INDEX:', bookIndex);
   let sql = 'INSERT INTO books (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
   let values = [bookArray[bookIndex].author, bookArray[bookIndex].title, bookArray[bookIndex].isbn, bookArray[bookIndex].image_url, bookArray[bookIndex].descriptions, bookArray[bookIndex].bookshelf];
   client.query(sql, values)
-    .then(response.redirect('/books/detail/:book_id'))
+
+  // NEED TO FIX BOOK ID HERE
+    .then(response.redirect(`/books/detail/${book_id}`))
     .catch(error => errorHandler(error, request, response));
 }
 
@@ -113,12 +124,27 @@ function viewOneBook(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
+// ========== Update Book Information ========== //
+function updateBooks(request, response){
+  let id = request.params.book_id;
+  let {author, title, isbn, descriptions, image_url} = request.body;
+  console.log('THE BOOK ID IS:', id);
+
+  let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, descriptions=$4, image_url=$5 WHERE id=$6;';
+  let values = [author, title, isbn, descriptions, image_url, request.params.book_id];
+  client.query(sql, values)
+    .then(response.redirect(`/update/${request.params.book_id}`))
+    .catch(error => errorHandler(error, request, response));
+}
+
 // ========== Book Constructor Object ========== //
 function Book(infoFromAPI, i){
+  console.log('THIS IS INFO FROM API:', infoFromAPI);
   const placeholderImg = 'https://i.imgur.com/J5LVHEL.jpg';
   let imgLink = infoFromAPI.imageLinks.thumbnail.replace(/^http:/, 'https:');
   let isbnData = infoFromAPI.industryIdentifiers[0];
-  this.author = infoFromAPI.authors[0] ? infoFromAPI.authors[0] : 'no author available';
+  let trimArthor = infoFromAPI.authors.toString(' , ');
+  this.author = trimArthor ? trimArthor : 'no author available';
   this.title = infoFromAPI.title ? infoFromAPI.title : 'no title available';
   this.isbn = isbnData.type + isbnData.identifier ? isbnData.type + isbnData.identifier : 'no ISBN available';
   this.descriptions = infoFromAPI.descriptions ? infoFromAPI.descriptions : 'no description available';
