@@ -4,18 +4,22 @@
 
 
     <%- include('../../layout/header.ejs') %>
+    
+    <%- console.log(book) %>
 
     <main>
-        <header>
-            <a class="detail-backlink" href="/">< back to my bookshelf</a>
+        <header class="detail-header">
+            <a class="backlink" href="/">< back to my bookshelf</a>
+            <a class="save button button-secondary" href="/books/delete/<%= book.id %>"> edit</a>
+            <a class="save button button-primary" href="/books/delete/<%= book.id %>"> delete</a>
         </header>
-
+        
         <img class="cover-image" src="<%= book.image_url %>" />
         <h2 class="title"><%= book.title %></h2>
         <h4 class="author">by <%= book.author %></h4>
         <p class="isbn"><%= book.isbn %></p>
         <p class="descriptions"><%= book.descriptions %></p>
-
+        
     </main>
 
     <%- include('../../layout/footer.ejs') %>
