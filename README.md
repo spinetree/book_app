@@ -3,7 +3,7 @@
 # Project Name
 
 **Author**: Karina Chen, Steve Rokitka
-**Version**: 1.0.1 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.3 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
 This app is a website that you can search all the Google books by the title or arthur of the book. The website is set up to have a form for users to input the title or the arthur of the book they want to search for. Then the website uses Google Book API to search for the books. The search result shows the book title and the arthur of the books the users searched. The search results will be saved in database to reduce the number of times the Google Book API is run. The app is built with a local server that uses EJS to render html files.
@@ -18,6 +18,8 @@ This app is built by HTML, CSS, JavaScirpt, Express.js, EJS, PG, Superagent, and
 
 09-24-19 - site started, hits google api but doesnt properly render data yet. So close tho.
 09-25-19 - site has a db that displays and detail view. next write/add
+09-26-19 - site can save books to db
+09-27-19 - can delete and update
 
 <!-- ## Credits and Collaborations -->
  Nav sourced from https://codepen.io/erikterwan/pen/EVzeRP 
@@ -133,11 +135,11 @@ Number and name of feature: #4 Add new books
 
 Estimate of time needed to complete: 2 hours
 
-Start time: 
+Start time: 10am
 
-Finish time: n/a
+Finish time: 12pm (well kinda, we keep breaking then fixing it)
 
-Actual time needed to complete: n/a
+Actual time needed to complete: 2 hours
 
 -------------------
 
@@ -169,37 +171,27 @@ Actual time needed to complete: 1 hours
 
 Number and name of feature: 1 Update details of books already in db from detail view
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 2 hours
 
-Start time: 
+Start time: 1pm
 
-Finish time: n/a
+Finish time: 2pm
 
-Actual time needed to complete: n/a
+Actual time needed to complete: 1 hour
 
 -------------------
 
 Number and name of feature:  2 Remove books from collection
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1 hour 
 
-Start time: 
+Start time: 1030am
 
-Finish time: n/a
+Finish time: 11 am
 
-Actual time needed to complete: n/a
+Actual time needed to complete: 30 mins
 
--------------------
 
-Number and name of feature:  3 
-
-Estimate of time needed to complete: 
-
-Start time: 
-
-Finish time: n/a
-
-Actual time needed to complete: n/a
 
 ** --------------------------------------------------------------------------**
 
