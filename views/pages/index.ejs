@@ -12,12 +12,14 @@
             
             <header>
                 <h2>My bookshelf</h2>
+                <p class="total-count">Total books: <%= data.length %></p>
             </header>
+
 
             <ul id="bookshelf-list" class="book-grid">
 
                 <% 
-                        // console.log(data); 
+                        console.log(data); 
                         data.forEach(book => { %>
                 <li class="book-result">
                     <img class="cover-image" src="<%= book.image_url %>" />
