@@ -39,29 +39,31 @@ app.get('/', myBookshelf);
 app.get('/searches/new', renderForm);
 // render search results from Google Book API
 app.post('/searches', searchBooks);
-// update information of books
-app.put('/update/:book_id', updateBooks);
+// modify data of the newly added book
+app.post('/books/add/:book_index', modifyBookInfo);
 // add a new book to database and redirect to Home page
 app.get('/books/save/:book_index', addBooksToDB);
 // select a book on Home page to show a detail view
-app.get('/books/detail/:book_id', viewOneBook);
+app.get('/books/detail/:book_id', viewDBBook);
+// update information of books
+app.put('/update/:book_id', updateDBBooks);
 // delete a book from database on home page
 app.get('/books/delete/:book_id', deleteBook);
 
 // ========== Catch All Other Routes ========== //
 app.get('*', (request, response) => response.status(404).render('pages/error'));
 
-// ========== Render Views ========== //
-function renderForm(request, response){
-  response.render('pages/searches/new');
-}
-
-// ========== Get Data From Database ========== //
+// ========== Home Page to show Database ========== //
 function myBookshelf(request, response){
   let sql = 'SELECT * FROM books;';
   client.query(sql)
     .then(results => response.render('pages/index', {data: results.rows}))
     .catch(error => errorHandler(error, request, response));
+}
+
+// ========== Render Search Form ========== //
+function renderForm(request, response){
+  response.render('pages/searches/new');
 }
 
 // ========== Google API Function ========== //
@@ -101,20 +103,21 @@ function searchBooks(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
-// ========== Update Book Information ========== //
-function updateBooks(request, response){
-  let id = request.params.book_id;
-  let {author, title, isbn, descriptions, image_url} = request.body;
-  console.log('THE BOOK ID IS:', id);
+// ========== View Detail on New Book ========== //
 
-  let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, descriptions=$4, image_url=$5 WHERE id=$6;';
-  let values = [author, title, isbn, descriptions, image_url, request.params.book_id];
-  client.query(sql, values)
 
-  // REDIRECT TO ADD BOOKS TO DATABASE ???
-    .then(response.redirect(`/update/${request.params.book_id}`))
-    .catch(error => errorHandler(error, request, response));
-}
+// ========== Modify the New Book and Save Form Data ========== //
+// function modifyBookInfo(request, response){
+//   let index = request.params.book_index;
+//   let {author, title, isbn, descriptions, image_url} = request.body;
+//   console.log('THE BOOK INDEX IS:', index);
+
+//   let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, descriptions=$4, image_url=$5 WHERE id=$6;';
+//   let values = [author, title, isbn, descriptions, image_url, request.params.book_index];
+//   client.query(sql, values)
+//     .then(response.redirect('/books/save/:book_index'))
+//     .catch(error => errorHandler(error, request, response));
+// }
 
 // ========== Save a New Book in Database ========== //
 // All the search results are saved here in bookArray ready for us to grab and save to db.
@@ -132,12 +135,25 @@ function addBooksToDB(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
-// ========== View a Book in a Detailed View ========== //
-function viewOneBook(request, response){
+// ========== View Detail on Database Book ========== //
+function viewDBBook(request, response){
   let sql = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.book_id];
   client.query(sql, values)
     .then(result => response.render('pages/books/detail', {book: result.rows[0]}))
+    .catch(error => errorHandler(error, request, response));
+}
+
+// ========== Update Book in Database ========== //
+function updateDBBooks(request, response){
+  let id = request.params.book_id;
+  let {author, title, isbn, descriptions, image_url} = request.body;
+  console.log('THE BOOK ID IS:', id);
+
+  let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, descriptions=$4, image_url=$5 WHERE id=$6;';
+  let values = [author, title, isbn, descriptions, image_url, request.params.book_id];
+  client.query(sql, values)
+    .then(response.redirect('/'))
     .catch(error => errorHandler(error, request, response));
 }
 
