@@ -39,8 +39,6 @@ app.get('/', myBookshelf);
 app.get('/searches/new', renderForm);
 // render search results from Google Book API
 app.post('/searches', searchBooks);
-// modify data of the newly added book
-app.post('/books/add/:book_index', modifyBookInfo);
 // add a new book to database and redirect to Home page
 app.get('/books/save/:book_index', addBooksToDB);
 // select a book on Home page to show a detail view
@@ -103,22 +101,6 @@ function searchBooks(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
-// ========== View Detail on New Book ========== //
-
-
-// ========== Modify the New Book and Save Form Data ========== //
-// function modifyBookInfo(request, response){
-//   let index = request.params.book_index;
-//   let {author, title, isbn, descriptions, image_url} = request.body;
-//   console.log('THE BOOK INDEX IS:', index);
-
-//   let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, descriptions=$4, image_url=$5 WHERE id=$6;';
-//   let values = [author, title, isbn, descriptions, image_url, request.params.book_index];
-//   client.query(sql, values)
-//     .then(response.redirect('/books/save/:book_index'))
-//     .catch(error => errorHandler(error, request, response));
-// }
-
 // ========== Save a New Book in Database ========== //
 // All the search results are saved here in bookArray ready for us to grab and save to db.
 let bookArray = [];
@@ -128,10 +110,9 @@ function addBooksToDB(request, response){
   console.log('BOOK INDEX:', bookIndex);
   let sql = 'INSERT INTO books (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
   let values = [bookArray[bookIndex].author, bookArray[bookIndex].title, bookArray[bookIndex].isbn, bookArray[bookIndex].image_url, bookArray[bookIndex].descriptions, bookArray[bookIndex].bookshelf];
+  let getId = 'SELECT id FROM books ORDER BY Id DESC LIMIT 1;';
   client.query(sql, values)
-
-  // REDIRECT TO VIDE DETAIL OF NEWLY ADDED BOOK ???
-    .then(response.redirect(`/books/detail/${bookIndex}`))
+    .then(response.redirect(`/books/detail/${getId}`))
     .catch(error => errorHandler(error, request, response));
 }
 
