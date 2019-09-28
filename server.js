@@ -59,6 +59,14 @@ function myBookshelf(request, response){
     .catch(error => errorHandler(error, request, response));
 }
 
+// ========== New Home Page to show Database ========== //
+function newBookshelf(request, response){
+  let sql = 'SELECT * FROM books;';
+  client.query(sql)
+    .then(results => response.render('pages/index', {data: results.rows}))
+    .catch(error => errorHandler(error, request, response));
+}
+
 // ========== Render Search Form ========== //
 function renderForm(request, response){
   response.render('pages/searches/new');
@@ -110,9 +118,14 @@ function addBooksToDB(request, response){
   console.log('BOOK INDEX:', bookIndex);
   let sql = 'INSERT INTO books (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
   let values = [bookArray[bookIndex].author, bookArray[bookIndex].title, bookArray[bookIndex].isbn, bookArray[bookIndex].image_url, bookArray[bookIndex].descriptions, bookArray[bookIndex].bookshelf];
-  let getId = 'SELECT id FROM books ORDER BY Id DESC LIMIT 1;';
+  // console.log('LAST ID IS:', getId)
+  // let getId = 'SELECT LAST id FROM books;';
+  // let lastId = -1;
+  // client.query(getId)
+  //   .then(result => result = lastId);
   client.query(sql, values)
-    .then(response.redirect(`/books/detail/${getId}`))
+    .then(response.redirect('/'))
+    // .then(response.redirect(`/books/detail/${getId}`))
     .catch(error => errorHandler(error, request, response));
 }
 
